@@ -33,7 +33,7 @@ title:  "%s"
 date:   %s
 categories: %s
 ---
-"""%(title, str(now), category)
+"""%(title, filename_date, category)
 
 print(data)
 #make file
