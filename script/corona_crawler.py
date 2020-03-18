@@ -2,14 +2,14 @@ import urllib.request
 import re
 from bs4 import BeautifulSoup
 
-'''
+
 url = "http://ncov.mohw.go.kr/"
 fp = urllib.request.urlopen(url)
-source = fp.read()
+data = fp.read()
 fp.close()
 
-print (source)
-'''
+#print (source)
+
 
 
 def FindInt(string):
@@ -18,14 +18,14 @@ def FindInt(string):
     return int(int_string)
 
 
-f = open('test.html', 'r', encoding='utf-8')
-data = f.read()
+#f = open('test.html', 'r', encoding='utf-8')
+#data = f.read()
 
 soup = BeautifulSoup(data, 'html.parser')
 content = soup.find('div' ,class_='live_left')
 
 update_date = content.find('span',class_='livedate').text
-print("ì—…ë°ì´íŠ¸ ë‚ ì§œ : %s" % update_date)
+print("¾÷µ¥ÀÌÆ® ³¯Â¥ : %s" % update_date)
 live_data = content.find_all('span',class_='num')
 confirm = FindInt(live_data[0].text)
 recover = FindInt(live_data[1].text)
@@ -34,20 +34,20 @@ dead = FindInt(live_data[3].text)
 examine = FindInt(live_data[4].text)
 examine_complete = FindInt(live_data[5].text)
 
-print("í™•ì§„ì : %s" % confirm)
-print("ì™„ì¹˜ : %s" % recover)
-print("ì¹˜ë£Œ ì¤‘ : %s" % cure)
-print("ì‚¬ë§ : %s" % dead)
-print("ëˆ„ì  ê²€ì‚¬ìˆ˜ : %s" % examine)
-print("ëˆ„ì  ê²€ì‚¬ì™„ë£Œìˆ˜ : %s" % examine_complete)
-print("ëˆ„ì  í™•ì§„ë¥  : %.2f%%" % (confirm/examine_complete*100))
+print("È®ÁøÀÚ : %s" % confirm)
+print("¿ÏÄ¡ : %s" % recover)
+print("Ä¡·á Áß : %s" % cure)
+print("»ç¸Á : %s" % dead)
+print("´©Àû °Ë»ç¼ö : %s" % examine)
+print("´©Àû °Ë»ç¿Ï·á¼ö : %s" % examine_complete)
+print("´©Àû È®Áø·ü : %.2f%%" % (confirm/examine_complete*100))
 
 city_data = soup.find('div', class_='live_right').find_all('button')
 for cdata in city_data:
     city_num = cdata['data-city']
     city_name = cdata.find('span', class_='name').text
     city_virus = cdata.find('span', class_='num').text
-    print ("ë„ì‹œ : %s, í™•ì§„ì : %s" % (city_name, city_virus))
+    print ("µµ½Ã : %s, È®ÁøÀÚ : %s" % (city_name, city_virus))
 
 
 
